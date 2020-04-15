@@ -3,7 +3,7 @@ package algorithms;
 import java.util.Scanner;
 
 /*
- * 分治法实现大数相乘
+ * 分治法shi'x大数相乘
  */
 
 
