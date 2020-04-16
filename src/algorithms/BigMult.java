@@ -2,10 +2,9 @@ package algorithms;
 
 import java.util.Scanner;
 
-/*
- * 分治法shi'x大数相乘
+/**
+ * 分治法大数相乘 author eao version v1.0
  */
-
 
 public class BigMult {
 	public static void main(String[] args) {
@@ -28,15 +27,21 @@ public class BigMult {
 			return x * y;
 		} else {
 			A = (long) (num1 / Math.pow(10, n / 2));
-			//System.out.println("A = " + A);
+			System.out.print("A=" + A + "\t");
 			B = (long) (num1 - A * Math.pow(10, n / 2));
-			//System.out.println("B = " + B);
+			System.out.print("B=" + B + "\t");
 			C = (long) (num2 / Math.pow(10, n / 2));
+			System.out.print("C=" + C + "\t");
 			D = (long) (num2 - C * Math.pow(10, n / 2));
+			System.out.print("D=" + D + "\n");
 			AC = mult(A, C, n / 2);
+			System.out.print("AC=" + AC + "\n");
 			BD = mult(B, D, n / 2);
+			System.out.print("BD=" + BD + "\n");
 			ABDC = mult((A - B), (D - C), n / 2) + AC + BD;
+			System.out.print("ABDC=" + ABDC + "\n");
 			S = S * (long) (AC * Math.pow(10, n) + ABDC * Math.pow(10, n / 2) + BD);
+			System.out.printf("S==%d*10^%d + %d*10^%d + %d == %d\n", AC, n, ABDC, n / 2, BD, S);
 		}
 		return S;
 	}
