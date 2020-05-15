@@ -127,7 +127,7 @@ public class AVLTree<Key extends Comparable<? super Key>, Value> {
 		} else if (node.right == null) {
 			return node;
 		} else {
-			return minNode(node.right);
+			return maxNode(node.right);
 		}
 	}
 
