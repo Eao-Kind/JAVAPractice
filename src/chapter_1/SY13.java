@@ -11,28 +11,14 @@ import java.io.Writer;
 
 public class SY13 {
 	public static void main(String[] args) throws IOException {
-		CopyFileDemo.Solution("诗词.txt", "诗词反转.txt");
-	}
-}
-
-class CopyFileDemo {
-	public static void Solution(String fr, String fw) throws IOException {
-		File fWrite = new File(fw); // 输出文件
-		if (!fWrite.exists()) {
-			fWrite.createNewFile(); // 不存在则创建文件
-		}
+		File fWrite = new File("诗词反转.txt"); // 输出文件
+		String str = null;
+		StringBuffer strb = new StringBuffer();
 		try {
-			String str = null;
-			StringBuffer strb = new StringBuffer();
-
-			BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(fr), "utf-8")); // 缓冲读取
-			Writer out = new FileWriter(fWrite);
-			BufferedWriter bfw = new BufferedWriter(out); // 缓冲写入
-
-			while ((str = bfr.readLine()) != null) {
+			BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream("诗词.txt"), "utf-8")); // 缓冲读取
+			BufferedWriter bfw = new BufferedWriter(new FileWriter(fWrite)); // 缓冲写入
+			while ((str = bfr.readLine()) != null)
 				strb.append(str + "\n"); // 读取数据
-				System.out.println(str);
-			}
 			strb.delete(strb.length() - 1, strb.length());
 			bfw.write(strb.reverse().toString()); // 写入数据
 			bfr.close();
