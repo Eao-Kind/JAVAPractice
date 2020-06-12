@@ -21,15 +21,17 @@ public class SY15 {
 		for (Book b : bookList) {
 			System.out.println(b.name + "---" + b.price);
 		}
+		System.out.println();
 		Book js = new Book("JavaScript", 29.0);
-		int index = Collections.binarySearch(bookList, js, null);
-		if (index >= 0) {
-			System.out.println("\r\n" + js.name + " 和链表中 " + bookList.get(index).name + " 价格相同");
+		int index = 0;
+		while ((index = Collections.binarySearch(bookList, js, null)) >= 0) {
+			System.out.println(js.name + " 和链表中 " + bookList.get(index).name + " 价格相同");
+			bookList.remove(index);
 		}
 	}
 }
 
-class Book implements Comparable {
+class Book implements Comparable<Book> {
 	String name;
 	double price;
 
@@ -38,8 +40,7 @@ class Book implements Comparable {
 		this.price = price;
 	}
 
-	public int compareTo(Object o) { // 两个Book相等当且仅当price等
-		Book that = (Book) o;
+	public int compareTo(Book that) { // 两个Book相等当且仅当price等
 		return (int) (this.price - that.price);
 	}
 }
