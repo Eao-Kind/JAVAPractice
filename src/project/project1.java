@@ -1,5 +1,4 @@
 package project;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -7,9 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.HashSet;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -109,7 +107,7 @@ class PoliceListen implements MyCommandListener { // 事件处理
 		}
 	}
 
-	private static String showDetailName(HashSet nameSet) {
+	private static String showDetailName(HashSet<Integer> nameSet) {
 		Mysql ms = new Mysql();
 		String rs = ms.Solution(nameSet); // 根据学号获得姓名
 		return (rs); // 返回详细信息
@@ -144,14 +142,16 @@ class Mysql {
 		}
 	}
 
-	public String Solution(HashSet<Integer> hm) {
+	public String Solution(HashSet<Integer> nameSet) {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = connection.createStatement(); // 获取数据库操作对象
 			String nameDetail = "";
 			int count = 0;
-			for (int i : hm) {
+			int[] hm = nameSet.stream().mapToInt(Number::intValue).toArray(); // hashSet转数组
+			Arrays.sort(hm);
+			for (Object i : hm) {
 				String sql = "select * from Sheet1 where Number = " + i; // 根据学号查询姓名
 				rs = stmt.executeQuery(sql);
 				while (rs.next()) {
@@ -177,7 +177,6 @@ class Mysql {
 				e.printStackTrace();
 			}
 		}
-
 		return "";
 	}
 }
