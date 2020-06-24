@@ -2,15 +2,9 @@ package project;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Scanner;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 public class project2 {
 	public static void main(String[] args) throws FileNotFoundException {
@@ -18,17 +12,15 @@ public class project2 {
 		ArrayList<String> wordList = tl.getAllWord(new File("test.txt"), "[A-Za-z]+"); // 获取单词列表 正则表达式
 		System.out.println("\n一共出现的单词数：" + wordList.size());
 		Map<String, Integer> mp = tl.wordStatistics(wordList); // 按字典顺序排序
-		System.out.println("互不相同的单词数：" + mp.size() +"\n\n按字典顺序：");
+		System.out.println("互不相同的单词数：" + mp.size() + "\n\n按字典顺序：");
 
-		for (String key : mp.keySet()) {
+		for (String key : mp.keySet()) 
 			System.out.println("单词个数：" + mp.get(key) + " 单词为：" + key);
-		}
 
 		List<Entry<String, Integer>> list = tl.mySort(mp); // 按照词频顺序排序
 		System.out.println("\n按词频顺序：");
-		for (Map.Entry<String, Integer> entry : list) {
+		for (Map.Entry<String, Integer> entry : list) 
 			System.out.println("单词个数：" + entry.getValue() + " 单词为：" + entry.getKey());
-		}
 	}
 }
 
