@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class project2 {
 	public static void main(String[] args) throws FileNotFoundException {
 		TextTool tl = new TextTool();
-		ArrayList<String> wordList = tl.getAllWord(new File("English.txt"), "[a-zA-z]+"); // 获取单词列表 正则表达式
+		ArrayList<String> wordList = tl.getAllWord(new File("test.txt"), "[A-Za-z]+"); // 获取单词列表 正则表达式
 		System.out.println("一共出现的单词数：" + wordList.size());
 		Map<String, Integer> mp = tl.wordStatistics(wordList); // 按字典顺序排序
 		System.out.println("互不相同的单词数：" + mp.size());
@@ -39,9 +39,11 @@ class TextTool {
 	public ArrayList<String> getAllWord(File source, String regex) throws FileNotFoundException { // 根据传入的正则获取单词列表
 		Scanner sc = new Scanner(source); // 读取文件
 		ArrayList<String> ls = new ArrayList<String>(); // 获取所有单词组成的列表
-		while (sc.hasNextLine()) {
+		while (sc.hasNext()) {
 			Pattern p = Pattern.compile(regex);
-			Matcher m = p.matcher(sc.next());
+			String str = sc.nextLine();
+			System.out.println(str);
+			Matcher m = p.matcher(str);
 			while (m.find())
 				ls.add(m.group().toLowerCase()); // 提取单词 并 转换为小写
 		}
